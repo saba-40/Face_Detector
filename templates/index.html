@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Emotion Detection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #ffe4ec, #f7f7f7); /* Pink + Soft Grey */
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        .container {
+            margin-top: 50px;
+            background: white;
+            width: 400px;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(255, 150, 180, 0.3);
+            display: inline-block;
+        }
+
+        h1 {
+            color: #ff4f9a; /* Soft Pink heading */
+            margin-bottom: 10px;
+        }
+
+        input[type="file"] {
+            margin: 15px 0;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            background: #ff69b4;   /* Pink Button */
+            color: white;
+            cursor: pointer;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #ff3f99; /* Darker Pink Hover */
+        }
+
+        .emotion-box {
+            margin-top: 20px;
+            padding: 12px;
+            background: #ffe0ef;   /* Light Pink Box */
+            border-radius: 8px;
+            color: #d63384;        /* Strong pink text */
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        img {
+            margin-top: 15px;
+            border-radius: 10px;
+            max-width: 100%;
+            box-shadow: 0 0 10px rgba(255, 150, 180, 0.3);
+        }
+
+        .webcam-btn {
+            margin-top: 20px;
+            background: #ff89c4;   /* Lighter pink */
+        }
+
+        .webcam-btn:hover {
+            background: #ff5fa8;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Emotion Detection</h1>
+
+        <form method="POST" enctype="multipart/form-data">
+            <input type="file" name="file" required>
+            <br>
+            <button type="submit">Analyze Image</button>
+        </form>
+
+        {% if emotion %}
+            <div class="emotion-box">
+                Detected Emotion: <b>{{ emotion }}</b>
+            </div>
+            <img src="/static/uploads/{{ image }}">
+        {% endif %}
+
+        <br>
+        <a href="/webcam">
+            <button class="webcam-btn">Use Webcam</button>
+        </a>
+    </div>
+
+</body>
+</html>
