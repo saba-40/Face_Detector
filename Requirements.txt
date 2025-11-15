@@ -1,0 +1,7 @@
+Flask
+deepface
+opencv-python
+tensorflow==2.13.0
+tf-keras
+numpy
+pillow
