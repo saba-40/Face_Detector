@@ -3,14 +3,10 @@ from emotion_detector import detect_emotion
 import cv2
 from deepface import DeepFace
 import os
-
 app = Flask(__name__)
 UPLOAD_FOLDER = 'static/uploads'
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
-
-# -----------------------
-# Image Upload Route
-# -----------------------
+#image upload route
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
@@ -20,10 +16,7 @@ def index():
         emotion = detect_emotion(file_path)
         return render_template('index.html', emotion=emotion, image=file.filename)
     return render_template('index.html')
-
-# -----------------------
 # Webcam Video Stream
-# -----------------------
 def gen_frames():
     cap = cv2.VideoCapture(0)
 
@@ -46,10 +39,7 @@ def gen_frames():
 
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
-
-# -----------------------
 # Webcam Route
-# -----------------------
 @app.route('/webcam')
 def webcam():
     return render_template('webcam.html')
@@ -58,9 +48,6 @@ def webcam():
 def video():
     return Response(gen_frames(),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
-
-# -----------------------
 # Run Server
-# -----------------------
 if __name__ == '__main__':
     app.run(debug=True)
